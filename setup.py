@@ -45,8 +45,8 @@ extra_compile_args = ['-O3']
 extra_link_args = []
 
 if has_openmp():
-    extra_compile_args = ['-fopenmp']
-    extra_link_args = ['-lgomp']
+    extra_compile_args += ['-fopenmp']
+    extra_link_args += ['-lgomp']
 
 ext_modules = [
     Extension(
