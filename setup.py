@@ -6,7 +6,7 @@ import numpy
 import os, tempfile, subprocess, shutil
 
 # see http://openmp.org/wp/openmp-compilers/
-omp_test = r"""#include <omp.h>
+omp_test = br"""#include <omp.h>
 #include <stdio.h>
 int main() {
 #pragma omp parallel
@@ -20,7 +20,7 @@ def has_openmp():
     os.chdir(tmpdir)
 
     filename = r'test.c'
-    file = open(filename,'w', 0)
+    file = open(filename, 'bw', 0)
     file.write(omp_test)
     with open(os.devnull, 'w') as fnull:
         result = subprocess.call(['cc', '-fopenmp', filename], stdout=fnull,
@@ -33,7 +33,7 @@ def has_openmp():
 
     return result == 0
 
-ceres_include = "/usr/local/include/ceres/"
+ceres_include = "/usr/local/include/"
 
 ceres_lib = "/usr/local/lib/"
 gflags_lib = "/usr/local/lib/"
@@ -41,8 +41,8 @@ glog_lib = "/usr/local/lib/"
 cholmod_lib = amd_lib = camd_lib = colamd_lib = "/usr/local/lib/"
 cxsparse_lib = "/usr/local/lib/"
 
-extra_compile_args = ['-O3']
-extra_link_args = []
+extra_compile_args = ['-O3', '--std=c++11']
+extra_link_args = ['-Wl,-rpath', ceres_lib]
 
 if has_openmp():
     extra_compile_args += ['-fopenmp']
