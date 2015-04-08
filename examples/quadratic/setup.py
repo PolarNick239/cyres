@@ -5,7 +5,7 @@ import os
 import numpy
 import cyres
 
-ceres_include = "/usr/local/include/ceres/"
+ceres_include = "/usr/local/include/"
 eigen_choices = ["/usr/local/include/eigen3", "/usr/include/eigen3"]
 eigen_include = [x for x in eigen_choices if os.path.exists(x)][0]
 
